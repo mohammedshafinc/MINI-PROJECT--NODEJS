@@ -61,4 +61,13 @@ module.exports = {
     homeGet: (req, res) => {
         res.render("homepage");
     },
+    loginGet: (req, res) => {
+        res.render("login", { error: "" });
+    },
+    adminGEt: (req, res) => {
+        res.render("admin");
+    },
+    logout: (req, res) => {
+        res.redirect("/login");
+    },
 };
