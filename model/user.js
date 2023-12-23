@@ -1,17 +1,11 @@
 const mongoose = require("mongoose");
-const config = require("../config/database");
-mongoose
-    .connect(config.mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("connected to mongo db");
-    })
-    .catch((err) => {
-        console.log("error db is not connected" + err);
-    });
+const userSchema = new mongoose.Schema({
+    fullname: String,
+    email: String,
+    password: String,
+    confirmpassword: String,
+});
 
-const db = mongoose.connection;
+const User = mongoose.model("Usersignups", userSchema);
 
-module.exports = mongoose;
+module.exports = User;
