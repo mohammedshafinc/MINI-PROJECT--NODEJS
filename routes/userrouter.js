@@ -1,6 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
+const { validatesingup } = require("../middleware/validation");
 
 const {
     mainRouter,
@@ -12,7 +13,7 @@ const {
 } = require("../controllers/usercontrol");
 
 router.get("/", mainRouter);
-router.post("/", signupPost);
+router.post("/", validatesingup, signupPost);
 router.get("/homepage", homeGet);
 router.get("/login", loginGet);
 router.get("/admin", adminGEt);

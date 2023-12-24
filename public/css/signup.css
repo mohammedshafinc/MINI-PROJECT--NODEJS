@@ -49,6 +49,9 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+.error-message{
+    color: red;
+}
 p {
     margin-top: 16px;
     text-align: center;

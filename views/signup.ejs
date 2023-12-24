@@ -5,8 +5,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Signup Page</title>
-        <!-- <link rel="stylesheet" href="../public/styles/style.css"> -->
-        <link rel="stylesheet" href="/signup.css" />
+
+        <link rel="stylesheet" href="css/signup.css" />
         <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     </head>
     <body>
@@ -15,29 +15,34 @@
             <label for="fullname">FullName:</label>
             <input type="text" id="fullname" name="fullname" required />
             <label for="email">Email:</label>
-            <!-- onblur="emailval()" -->
+
             <input type="email" id="email" name="email" required />
             <p id="emailerr"></p>
             <p id="sameemail"><%= error %></p>
 
             <label for="password">Password:</label>
-            <!-- onblur="validation()" -->
-            <input type="password" id="passign" name="password" required />
+
+            <input type="password" id="password" name="password" required />
 
             <label for="confirmpassword">Confirm Password:</label>
             <input
                 type="password"
-                id="confirmpassword"
+                id="confirmPassword"
                 name="confirmpassword"
                 required
             />
             <p id="passerr"></p>
+
+            <% if (error) { %>
+            <div class="error-message"><%= error.email %></div>
+            <% } %>
             <br /><br />
 
             <br />
             <button type="submit">Sign up</button>
         </form>
         <p>Already have an account? <a href="/login">Login</a></p>
-        <!-- <script src="../validation/validation.js"></script> -->
+        <!-- <script src="/middleware/validation.js"></script> -->
+        <script src="/js/validation.js"></script>
     </body>
 </html>

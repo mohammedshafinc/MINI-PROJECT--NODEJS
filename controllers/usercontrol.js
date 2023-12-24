@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../model/user");
 const config = require("../config/config");
 
+
 const addUser = async (userData) => {
     try {
         if (mongoose.connection.readyState !== 1) {
