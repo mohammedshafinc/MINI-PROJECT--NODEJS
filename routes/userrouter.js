@@ -1,22 +1,24 @@
 const express = require("express");
 
 const router = express.Router();
-const { validatesingup } = require("../middleware/validation");
+const authentication = require("../middleware/validation");
 
 const {
     mainRouter,
     signupPost,
     homeGet,
     loginGet,
-    adminGEt,
+
     logout,
+    loginPost,
 } = require("../controllers/usercontrol");
 
 router.get("/", mainRouter);
-router.post("/", validatesingup, signupPost);
+router.post("/", authentication, signupPost);
+router.post("/login", loginPost);
 router.get("/homepage", homeGet);
 router.get("/login", loginGet);
-router.get("/admin", adminGEt);
+
 router.get("/logout", logout);
 
 module.exports = router;

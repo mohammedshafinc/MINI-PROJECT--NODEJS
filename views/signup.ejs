@@ -18,7 +18,6 @@
 
             <input type="email" id="email" name="email" required />
             <p id="emailerr"></p>
-            <p id="sameemail"><%= error %></p>
 
             <label for="password">Password:</label>
 
@@ -32,10 +31,7 @@
                 required
             />
             <p id="passerr"></p>
-
-            <% if (error) { %>
-            <div class="error-message"><%= error.email %></div>
-            <% } %>
+            <p id="sameemail"><%= errors %></p>
             <br /><br />
 
             <br />
