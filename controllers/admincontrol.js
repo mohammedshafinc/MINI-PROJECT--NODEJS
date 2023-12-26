@@ -13,4 +13,10 @@ module.exports = {
             console.log("error", error);
         }
     },
+    getUserList: async (req, res) => {
+        if (req.session.user && req.session.isAdmin) {
+            const userDetails = await User.find({});
+            res.render("userlist", { user: userDetails });
+        }
+    },
 };
