@@ -14,11 +14,11 @@ const {
 } = require("../controllers/usercontrol");
 
 router.get("/", mainRouter);
-router.post("/", authentication, signupPost);
-router.post("/login", loginPost);
 router.get("/homepage", homeGet);
 router.get("/login", loginGet);
-
 router.get("/logout", logout);
+
+router.post("/login", loginPost);
+router.post("/", authentication, signupPost);
 
 module.exports = router;

@@ -31,7 +31,7 @@ module.exports = {
             // Check if the required fields are provided
             if (!fullname || !email || !password || !confirmpassword) {
                 errors = "";
-                return res.status(404).render("signup", { errors });
+                return res.status(404).render("user/signup", { errors });
             }
 
             // Create a user object with the provided data
@@ -47,7 +47,7 @@ module.exports = {
             await addUser(userData);
 
             // Render the signup success view or redirect to a success page
-            res.render("homepage", { user: userData });
+            res.render("user/homepage", { user: userData });
         } catch (error) {
             console.error("Error in mainRouter:", error);
             res.status(500).send("Internal Server Error");
@@ -65,7 +65,7 @@ module.exports = {
             //check if user is exist
 
             if (existingUser) {
-                return res.status(400).render("signup", {
+                return res.status(400).render("user/signup", {
                     errors: `an account with ${email} already exist`,
                 });
             }
@@ -85,10 +85,10 @@ module.exports = {
         if (!req.session.user) {
             return res.redirect("/login");
         }
-        res.render("homepage", { User });
+        res.render("user/homepage", { User });
     },
     loginGet: (req, res) => {
-        res.render("login", { errors: "" });
+        res.render("user/login", { errors: "" });
     },
     loginPost: async (req, res) => {
         const { email, password } = req.body;
@@ -98,9 +98,9 @@ module.exports = {
             const user = await User.findOne({ email });
             console.log(user);
             if (!user) {
-                return res
-                    .status(401)
-                    .render("login", { errors: `no user found with ${email}` });
+                return res.status(401).render("user/login", {
+                    errors: `no user found with ${email}`,
+                });
             }
             const isPasswordValid = await bcrypt.compare(
                 password,
@@ -110,7 +110,9 @@ module.exports = {
             if (!isPasswordValid) {
                 return res
                     .status(401)
-                    .render("login", { errors: "Invalid email or password" });
+                    .render("user/login", {
+                        errors: "Invalid email or password",
+                    });
             }
             // } else {
             //     req.session.user = "shafin";

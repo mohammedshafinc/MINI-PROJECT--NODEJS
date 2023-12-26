@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/adminhome.css" />
+        <title>Admin Page</title>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to the Admin Page</h1>
+            <!-- Navigation Bar -->
+            <nav>
+                <ul>
+                    <li><a href="/createproduct">Add Products</a></li>
+                    <li><a href="/getuserlist">User List</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="product-list">
+                <h2>Product List</h2>
+                <ul class="product-grid">
+                    <% findData.forEach(product => { %>
+                    <li class="product-item">
+                        <img
+                            src="<%= product.image.replace('public\\', '') %>"
+                            alt="<%= product.name %>"
+                        />
+                        <h3><%= product.name %></h3>
+                        <p><%= product.description %></p>
+                        <span class="price">$<%= product.price %></span>
+                        <div class="product-actions">
+                            <button>
+                                <a href="/update/<%= product._id %>">Update</a>
+                            </button>
+                            <button>
+                                <a
+                                    href="/delete/<%= product._id %>"
+                                    onclick="confirmDelete(event)"
+                                    >Delete</a
+                                >
+                            </button>
+                        </div>
+                    </li>
+                    <% }); %>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Admin Page</p>
+        </footer>
+
+        <script>
+            function confirmDelete(event) {
+                let askConfirm = confirm("Are you sure to delete the product?");
+                if (!askConfirm) {
+                    event.preventDefault(); // Cancel the navigation if the user doesn't confirm
+                }
+            }
+        </script>
+    </body>
+</html>
