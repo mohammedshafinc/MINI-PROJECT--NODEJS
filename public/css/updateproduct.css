@@ -66,3 +66,13 @@ a {
 a:hover {
     color: #4caf50;
 }
+.goHome{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background-color:#45a049 ;
+    color: #ffff;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}

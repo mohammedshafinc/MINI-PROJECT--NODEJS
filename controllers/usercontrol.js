@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../model/user");
+const Products = require("../model/product");
 const bcrypt = require("bcrypt");
 const config = require("../config/config");
 
@@ -81,11 +82,13 @@ module.exports = {
         }
     },
 
-    homeGet: (req, res) => {
+    homeGet: async (req, res) => {
         if (!req.session.user) {
             return res.redirect("/login");
+        } else {
+            const showData = await Products.find({});
+            res.render("user/homepage", { showData });
         }
-        res.render("user/homepage", { User });
     },
     loginGet: (req, res) => {
         res.render("user/login", { errors: "" });
@@ -108,11 +111,9 @@ module.exports = {
             );
 
             if (!isPasswordValid) {
-                return res
-                    .status(401)
-                    .render("user/login", {
-                        errors: "Invalid email or password",
-                    });
+                return res.status(401).render("user/login", {
+                    errors: "Invalid email or password",
+                });
             }
             // } else {
             //     req.session.user = "shafin";

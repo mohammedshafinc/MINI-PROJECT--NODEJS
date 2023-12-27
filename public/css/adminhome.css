@@ -6,10 +6,11 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #317773;
     color: #fff;
     padding: 10px 0;
     text-align: center;
+
 }
 
 nav {
@@ -56,7 +57,8 @@ main {
     margin: 10px;
     padding: 15px;
     width: 250px; /* Decreased width */
-    height: 350px; /* Decreased height */
+    /* height: 350px; Decreased height */
+    min-height: 350px;
     text-align: center;
 }
 
@@ -74,6 +76,7 @@ main {
 
 .product-item p {
     color: #555;
+    text-align: start;
 }
 
 .price {
@@ -106,12 +109,4 @@ button:hover {
     background-color: #45a049;
 }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+

@@ -1,63 +1,89 @@
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 header {
-    background-color: #333;
+    background-color: #317773;
     color: #fff;
+    padding: 10px 0;
     text-align: center;
-    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
 }
 
+
+
+.logout-button{
+    text-decoration: none;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+ margin-left: 1150px;
+ 
+    cursor: pointer;
+}
+
+
 main {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.product-list {
+    text-align: center;
+}
+
+.product-grid {
+    list-style-type: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 1rem;
 }
 
-.product {
-    border: 1px solid #ccc;
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem;
-    max-width: 300px;
+    margin: 10px;
+    padding: 15px;
+    width: 250px; /* Decreased width */
+    /* height: 350px; Decreased height */
+    min-height: 350px;
     text-align: center;
 }
 
-.product img {
+.product-item img {
     max-width: 100%;
-    height: auto;
+    height: 150px; /* Fixed height for images */
+    object-fit: cover; /* Ensure images maintain aspect ratio within fixed height */
+    border-radius: 8px; /* Optional: Add border-radius to images */
+}
+
+.product-item h3 {
+    margin-top: 10px;
+    color: #333;
+}
+
+.product-item p {
+    color: #555;
+    text-align: start;
 }
 
 .price {
+    display: block;
+    margin-top: 10px;
+    color: #4caf50;
     font-weight: bold;
-    color: #007bff;
 }
 
-.add-to-cart {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.product-actions {
+    margin-top: 15px;
 }
 
-.add-to-cart:hover {
-    background-color: #0056b3;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}

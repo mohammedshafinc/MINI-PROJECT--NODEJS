@@ -13,14 +13,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // isAdmin: {
-    //     type: Number,
-    //     required: true,
-    // },
-    // isVarified: {
-    //     type: Number,
-    //     default: 0,
-    // },
     usertype: {
         type: String,
         default: "user",

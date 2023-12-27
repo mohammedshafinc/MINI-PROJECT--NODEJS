@@ -9,31 +9,27 @@
     <body>
         <header>
             <h1>Shopping Cart</h1>
+            <a href="/logout" class="logout-button">Logout</a>
         </header>
-        <a href="/logout">Logout</a>
 
         <main>
-            <section class="product">
-                <img src="product1.jpg" alt="Product 1" />
-                <h2>Product 1</h2>
-                <p>Description of Product 1.</p>
-                <span class="price">$19.99</span>
-                <button class="add-to-cart">Add to Cart</button>
+            <section class="product-list">
+                <h2>Product List</h2>
+                <ul class="product-grid">
+                    <% showData.forEach(product => { %>
+                    <li class="product-item">
+                        <img
+                            src="<%= product.image.replace('public\\', '') %>"
+                            alt="<%= product.name %>"
+                        />
+                        <h3><%= product.name %></h3>
+                        <p><%= product.description %></p>
+                        <span class="price">₹<%= product.price %></span>
+                        <div class="product-actions"></div>
+                    </li>
+                    <% }); %>
+                </ul>
             </section>
-
-            <section class="product">
-                <img src="product2.jpg" alt="Product 2" />
-                <h2>Product 2</h2>
-                <p>Description of Product 2.</p>
-                <span class="price">$29.99</span>
-                <button class="add-to-cart">Add to Cart</button>
-            </section>
-
-            <!-- Add more product sections as needed -->
         </main>
-
-        <footer>
-            <p>&copy; 2023 Shopping Cart</p>
-        </footer>
     </body>
 </html>
