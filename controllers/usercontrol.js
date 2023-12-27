@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../model/user");
 const Products = require("../model/product");
+const Profile = require("../model/profile");
 const bcrypt = require("bcrypt");
 const config = require("../config/config");
 
@@ -87,7 +88,9 @@ module.exports = {
             return res.redirect("/login");
         } else {
             const showData = await Products.find({});
-            res.render("user/homepage", { showData });
+            const loggedUser = req.session.user;
+            console.log(loggedUser);
+            res.render("user/homepage", { showData, user: loggedUser });
         }
     },
     loginGet: (req, res) => {
@@ -99,7 +102,7 @@ module.exports = {
         try {
             let errors = "";
             const user = await User.findOne({ email });
-            console.log(user);
+
             if (!user) {
                 return res.status(401).render("user/login", {
                     errors: `no user found with ${email}`,
@@ -121,7 +124,7 @@ module.exports = {
 
             //     res.redirect("/homepage");
             // }
-            req.session.user = "shafin";
+            req.session.user = user;
             if (user.usertype === "admin") {
                 req.session.isAdmin = true;
                 res.redirect("/adminhome");
@@ -141,5 +144,72 @@ module.exports = {
             }
         });
         res.redirect("/login");
+    },
+
+    getUpdateProfile: async (req, res) => {
+        try {
+            if (!req.session.user) {
+                res.redirect("/login");
+            }
+
+            const userId = req.session.user._id;
+
+            const user = await User.findById(userId);
+
+            console.log("User ID:", userId);
+
+            // Use $lookup to fetch user and profile details
+            const userData = await User.aggregate([
+                {
+                    $match: { _id: new mongoose.Types.ObjectId(userId) },
+                },
+                {
+                    $lookup: {
+                        from: "usersignups",
+                        localField: "profile",
+                        foreignField: "_id",
+                        as: "userProfile",
+                    },
+                },
+
+                {
+                    $unwind: {
+                        path: "$userProfile",
+                        preserveNullAndEmptyArrays: true,
+                    },
+                },
+            ]);
+            const userProfile = userData[0].userProfile;
+            console.log(userData);
+            console.log("dhksdfkdf", userProfile);
+
+            res.render("user/updateprofile", { userProfile, user });
+        } catch (error) {
+            console.log("error in get update profile", error);
+        }
+    },
+
+    postUpdateProfile: async (req, res) => {
+        try {
+            if (!req.session.user) {
+                return res.redirect("/login");
+            }
+
+            const userId = req.session.user._id;
+            const { name, email, address, place, district, state } = req.body;
+
+            // Update the profile details
+            await Profile.findOneAndUpdate(
+                { userId },
+                { name, email, address, place, district, state },
+                { new: true, upsert: true }
+            );
+            res.redirect("/homepage");
+        } catch (error) {
+            console.log("post update is not working", error);
+        }
+    },
+    getShowProfile: (req, res) => {
+        res.render("user/showprofile");
     },
 };

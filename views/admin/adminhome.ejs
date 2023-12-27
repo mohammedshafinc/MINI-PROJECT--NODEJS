@@ -31,7 +31,7 @@
                         />
                         <h3><%= product.name %></h3>
                         <p><%= product.description %></p>
-                        <span class="price">$<%= product.price %></span>
+                        <span class="price">₹<%= product.price %></span>
                         <div class="product-actions">
                             <button>
                                 <a href="/update/<%= product._id %>">Update</a>
@@ -49,8 +49,6 @@
                 </ul>
             </section>
         </main>
-
-     
 
         <script>
             function confirmDelete(event) {

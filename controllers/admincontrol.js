@@ -8,7 +8,7 @@ module.exports = {
         try {
             if (req.session.user && req.session.isAdmin) {
                 const findData = await Products.find({});
-                console.log(findData);
+                // console.log(findData);
                 res.render("admin/adminhome", { findData });
             } else {
                 res.redirect("/login");
@@ -33,7 +33,7 @@ module.exports = {
             res.send("image upload failed");
         } else {
             const path = req.file.path;
-            console.log(path);
+            // console.log(path);
             const newProduct = new Products({
                 name,
                 description,
@@ -47,7 +47,7 @@ module.exports = {
     getProductUpdate: async (req, res) => {
         const product_id = req.params.productId;
         const find_id = await Products.findById(product_id);
-        console.log("f id", find_id);
+        // console.log("f id", find_id);
         res.render("admin/updateproduct", { find_id });
     },
     updattingProduct: async (req, res) => {
@@ -63,7 +63,7 @@ module.exports = {
                 { _id: id },
                 { $set: { name, description, price, imgPath } }
             );
-            console.log(modify);
+            // console.log(modify);
             res.redirect("/adminhome");
         } catch (err) {
             console.log("update error", err);

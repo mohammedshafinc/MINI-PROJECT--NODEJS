@@ -8,8 +8,18 @@
     </head>
     <body>
         <header>
-            <h1>Shopping Cart</h1>
-            <a href="/logout" class="logout-button">Logout</a>
+            <div class="header-container">
+                <h1>Shopping Cart</h1>
+                <% if (user) { %>
+                <div class="user-welcome">
+                    <p>Welcome, <%= user.fullname %></p>
+                    <a href="/showprofile" class="update-profile"
+                        >Show Profile</a
+                    >
+                </div>
+                <% } %>
+                <a href="/logout" class="logout-button">Logout</a>
+            </div>
         </header>
 
         <main>
