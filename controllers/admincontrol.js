@@ -47,10 +47,6 @@ module.exports = {
                     },
                 },
             ]);
-            // const userProfile = userData.userProfile;
-            // console.log(userProfile);
-            // console.log("user", user);
-            // console.log("userdata", userData);
 
             res.render("admin/userlist", { user: userData });
         }

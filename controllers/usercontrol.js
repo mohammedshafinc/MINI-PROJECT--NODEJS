@@ -44,9 +44,11 @@ module.exports = {
                 password,
                 confirmpassword,
             };
+            console.log("userdata1", userData);
 
             // Call the function to add the user to the database
             await addUser(userData);
+            console.log("userdata2", userData);
 
             // Render the signup success view or redirect to a success page
             res.render("user/homepage", { user: userData });
@@ -73,7 +75,9 @@ module.exports = {
             }
 
             // User doesn't exist, add the new user to the database
+            console.log("userdata3in po", userData);
             await addUser(userData);
+            console.log("userdata4 in po", userData);
             req.session.user = userData;
             res.redirect("/homepage");
         } catch (error) {
@@ -165,9 +169,9 @@ module.exports = {
                 },
                 {
                     $lookup: {
-                        from: "usersignups",
-                        localField: "profile",
-                        foreignField: "_id",
+                        from: "profiles",
+                        localField: "_id",
+                        foreignField: "userId",
                         as: "userProfile",
                     },
                 },
@@ -179,17 +183,18 @@ module.exports = {
                     },
                 },
             ]);
-            const userProfile = userData[0].userProfile;
+            console.log("userdata", userData);
+            // const userProfile = userData[0].userProfile;
+            // console.log("user", userProfile);
             // console.log(userData);
             // console.log("dhksdfkdf", userProfile);
 
-            const showUser = await Profile.find({});
+            // const showUser = await Profile.find({});
             // console.log("showing user in get update", showUser);
 
             res.render("user/updateprofile", {
-                userProfile,
-                user,
-                newDetails: showUser,
+                user: userData,
+                // newDetails: showUser,
             });
             // console.log("new details", showUser);
         } catch (error) {
@@ -216,14 +221,22 @@ module.exports = {
         } catch (error) {
             console.log("post update is not working", error);
         }
+        r;
     },
     getShowProfile: async (req, res) => {
-        if (!req.session.user) {
-            res.redirect("/login");
-        }
+        try {
+            if (!req.session.user) {
+                res.redirect("/login");
+            }
+            console.log("Session User:", req.session.user);
+            const userId = req.session.user._id;
+            const showUser = await Profile.find({ userId });
+            console.log("showUserin show:", showUser); // Add this line for debugging
 
-        const showUser = await Profile.find({});
-        console.log(showUser);
-        res.render("user/showprofile", { users: showUser });
+            res.render("user/showprofile", { users: showUser });
+        } catch (error) {
+            console.error("Error in getShowProfile:", error);
+            res.status(500).send("Internal Server Error");
+        }
     },
 };

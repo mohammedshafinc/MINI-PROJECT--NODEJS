@@ -16,16 +16,16 @@
                 type="text"
                 id="name"
                 name="name"
-                value="<%= newDetails[0].name %>"
+                value="<%= user.name %>"
                 required
             />
 
-            <label for="email">email:</label>
+            <label for="email">Email:</label>
             <input
                 type="email"
                 id="email"
                 name="email"
-                value="<%= newDetails[0].email %>"
+                value="<%= user.email %>"
                 required
             />
 
@@ -34,7 +34,7 @@
                 type="text"
                 id="address"
                 name="address"
-                value="<%= newDetails[0].address %>"
+                value="<%= user?.userProfile?.address %>"
                 required
             />
 
@@ -43,7 +43,7 @@
                 type="text"
                 id="place"
                 name="place"
-                value="<%= newDetails[0].place %>"
+                value="<%= user?.userProfile?.place || '' %>"
                 required
             />
 
@@ -52,7 +52,7 @@
                 type="text"
                 id="district"
                 name="district"
-                value="<%= newDetails[0].district %>"
+                value="<%= user?.userProfile?.district || '' %>"
                 required
             />
 
@@ -61,7 +61,7 @@
                 type="text"
                 id="state"
                 name="state"
-                value="<%= newDetails[0].state %>"
+                value="<%= user?.userProfile?.state || '' %>"
                 required
             />
             <div class="uptuser">
