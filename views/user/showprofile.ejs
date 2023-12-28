@@ -1,41 +1,36 @@
-<!-- ------------------------------ -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/showprofile.css" />
+        <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+
         <title>User Page</title>
     </head>
+
     <body>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Place</th>
-                    <th>District</th>
-                    <th>State</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% users.forEach(user => { %>
-                <tr>
-                    <td><%= user.name %></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.address %></td>
-                    <td><%= user.place %></td>
-                    <td><%= user.district %></td>
-                    <td><%= user.state %></td>
-                    <td class="action-buttons"></td>
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
+        <div class="user-cards">
+            <% users.forEach(user => { %>
+            <div class="user-card">
+                <h2><%= user.name %></h2>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Address:</strong> <%= user.address %></p>
+                <p><strong>Place:</strong> <%= user.place %></p>
+                <p><strong>District:</strong> <%= user.district %></p>
+                <p><strong>State:</strong> <%= user.state %></p>
+                <!-- You can add additional information as needed -->
+
+                <div class="action-buttons">
+                    <!-- Add any action buttons or links here -->
+                </div>
+            </div>
+            <% }); %>
+        </div>
 
         <div class="update-profile-link">
             <a href="/updateprofile">Update Profile</a>
+            <a href="/homepage"> Homepage</a>
         </div>
     </body>
 </html>

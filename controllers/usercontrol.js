@@ -89,7 +89,7 @@ module.exports = {
         } else {
             const showData = await Products.find({});
             const loggedUser = req.session.user;
-            console.log(loggedUser);
+            // console.log(loggedUser);
             res.render("user/homepage", { showData, user: loggedUser });
         }
     },
@@ -148,7 +148,7 @@ module.exports = {
 
     getUpdateProfile: async (req, res) => {
         try {
-            if (!req.session.user) {
+            if (!req.session.user || !req.session.user._id) {
                 res.redirect("/login");
             }
 
@@ -156,7 +156,7 @@ module.exports = {
 
             const user = await User.findById(userId);
 
-            console.log("User ID:", userId);
+            // console.log("User ID:", userId);
 
             // Use $lookup to fetch user and profile details
             const userData = await User.aggregate([
@@ -180,10 +180,18 @@ module.exports = {
                 },
             ]);
             const userProfile = userData[0].userProfile;
-            console.log(userData);
-            console.log("dhksdfkdf", userProfile);
+            // console.log(userData);
+            // console.log("dhksdfkdf", userProfile);
 
-            res.render("user/updateprofile", { userProfile, user });
+            const showUser = await Profile.find({});
+            // console.log("showing user in get update", showUser);
+
+            res.render("user/updateprofile", {
+                userProfile,
+                user,
+                newDetails: showUser,
+            });
+            // console.log("new details", showUser);
         } catch (error) {
             console.log("error in get update profile", error);
         }

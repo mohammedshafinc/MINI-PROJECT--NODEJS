@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/updateprofile.css" />
+        <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+
         <title>Update Profile</title>
     </head>
     <body>
@@ -14,7 +16,7 @@
                 type="text"
                 id="name"
                 name="name"
-                value="<%= user.fullname %>"
+                value="<%= newDetails[0].name %>"
                 required
             />
 
@@ -23,7 +25,7 @@
                 type="email"
                 id="email"
                 name="email"
-                value="<%= user.email %>"
+                value="<%= newDetails[0].email %>"
                 required
             />
 
@@ -32,18 +34,36 @@
                 type="text"
                 id="address"
                 name="address"
-                value="<%= user.address %>"
+                value="<%= newDetails[0].address %>"
                 required
             />
 
             <label for="place">Place:</label>
-            <input type="text" id="place" name="place" required />
+            <input
+                type="text"
+                id="place"
+                name="place"
+                value="<%= newDetails[0].place %>"
+                required
+            />
 
             <label for="district">District:</label>
-            <input type="text" id="district" name="district" required />
+            <input
+                type="text"
+                id="district"
+                name="district"
+                value="<%= newDetails[0].district %>"
+                required
+            />
 
             <label for="state">State:</label>
-            <input type="text" id="state" name="state" required />
+            <input
+                type="text"
+                id="state"
+                name="state"
+                value="<%= newDetails[0].state %>"
+                required
+            />
             <div class="uptuser">
                 <button type="submit">Update Profile</button>
                 <a href="/homepage">Cancel</a>

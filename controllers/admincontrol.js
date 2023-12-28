@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../model/user");
 const Products = require("../model/product");
+const Profile = require("../model/profile");
 
 const bcrypt = require("bcrypt");
 module.exports = {
@@ -17,12 +18,44 @@ module.exports = {
             console.log("error", error);
         }
     },
+    // getUserList: async (req, res) => {
+    //     if (req.session.user && req.session.isAdmin) {
+    //         const userDetails = await User.find({});
+    //         res.render("admin/userlist", { user: userDetails });
+    //     }
+    // },
+
     getUserList: async (req, res) => {
         if (req.session.user && req.session.isAdmin) {
-            const userDetails = await User.find({});
-            res.render("admin/userlist", { user: userDetails });
+            const userId = req.session.user._id;
+
+            // const user = await User.find({});
+
+            const userData = await User.aggregate([
+                {
+                    $lookup: {
+                        from: "profiles",
+                        localField: "_id",
+                        foreignField: "userId",
+                        as: "userProfile",
+                    },
+                },
+                {
+                    $unwind: {
+                        path: "$userProfile",
+                        preserveNullAndEmptyArrays: true,
+                    },
+                },
+            ]);
+            // const userProfile = userData.userProfile;
+            // console.log(userProfile);
+            // console.log("user", user);
+            // console.log("userdata", userData);
+
+            res.render("admin/userlist", { user: userData });
         }
     },
+
     getAddProducts: (req, res) => {
         res.render("admin/addproduct");
     },
