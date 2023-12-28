@@ -204,12 +204,18 @@ module.exports = {
                 { name, email, address, place, district, state },
                 { new: true, upsert: true }
             );
-            res.redirect("/homepage");
+            res.redirect("/showprofile");
         } catch (error) {
             console.log("post update is not working", error);
         }
     },
-    getShowProfile: (req, res) => {
-        res.render("user/showprofile");
+    getShowProfile: async (req, res) => {
+        if (!req.session.user) {
+            res.redirect("/login");
+        }
+
+        const showUser = await Profile.find({});
+        console.log(showUser);
+        res.render("user/showprofile", { users: showUser });
     },
 };

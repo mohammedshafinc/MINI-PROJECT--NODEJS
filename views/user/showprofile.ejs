@@ -1,1 +1,41 @@
-<a href="/updateprofile">update Profile</a>
+<!-- ------------------------------ -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/showprofile.css" />
+        <title>User Page</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Place</th>
+                    <th>District</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.address %></td>
+                    <td><%= user.place %></td>
+                    <td><%= user.district %></td>
+                    <td><%= user.state %></td>
+                    <td class="action-buttons"></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <div class="update-profile-link">
+            <a href="/updateprofile">Update Profile</a>
+        </div>
+    </body>
+</html>
