@@ -16,7 +16,7 @@
                 type="text"
                 id="name"
                 name="name"
-                value="<%= user.name %>"
+                value="<%= userData[0]?.userProfile?.name %>"
                 required
             />
 
@@ -25,7 +25,7 @@
                 type="email"
                 id="email"
                 name="email"
-                value="<%= user.email %>"
+                value="<%= userData.email %>"
                 required
             />
 
@@ -34,7 +34,7 @@
                 type="text"
                 id="address"
                 name="address"
-                value="<%= user?.userProfile?.address %>"
+                value="<%= userData.address %>"
                 required
             />
 
@@ -43,7 +43,7 @@
                 type="text"
                 id="place"
                 name="place"
-                value="<%= user?.userProfile?.place || '' %>"
+                value="<%= userData.place || '' %>"
                 required
             />
 
@@ -52,7 +52,7 @@
                 type="text"
                 id="district"
                 name="district"
-                value="<%= user?.userProfile?.district || '' %>"
+                value="<%= userData.district || '' %>"
                 required
             />
 
@@ -61,7 +61,7 @@
                 type="text"
                 id="state"
                 name="state"
-                value="<%= user?.userProfile?.state || '' %>"
+                value="<%= userData.state || '' %>"
                 required
             />
             <div class="uptuser">

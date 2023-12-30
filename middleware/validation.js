@@ -37,7 +37,7 @@
 // module.exports = { validatesingup };
 
 function authentication(req, res, next) {
-    const { email, password } = req.body;
+    const { email, password, confirmpassword } = req.body;
 
     const epattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const echeck = epattern.test(email);
@@ -45,8 +45,15 @@ function authentication(req, res, next) {
     const ppattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/;
 
     const pcheck = ppattern.test(password);
+    const passwordMatch = password === confirmpassword;
 
-    if (echeck && pcheck) {
+    if (echeck && pcheck && passwordMatch) {
+        next();
+        console.log("if working");
+    } else {
+        console.log("not matching");
+
+        res.render("user/signup", { errors: "not matching" });
         next();
     }
 }

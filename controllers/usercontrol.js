@@ -4,6 +4,7 @@ const Products = require("../model/product");
 const Profile = require("../model/profile");
 const bcrypt = require("bcrypt");
 const config = require("../config/config");
+const authentication = require("../middleware/validation");
 
 let errors = "";
 
@@ -26,32 +27,7 @@ const addUser = async (userData) => {
 module.exports = {
     mainRouter: async (req, res) => {
         try {
-            let errors = "";
-            // Extract user data from the request
-            const { fullname, email, password, confirmpassword } = req.body;
-
-            // Check if the required fields are provided
-            if (!fullname || !email || !password || !confirmpassword) {
-                errors = "";
-                return res.status(404).render("user/signup", { errors });
-            }
-
-            // Create a user object with the provided data
-
-            const userData = {
-                fullname,
-                email,
-                password,
-                confirmpassword,
-            };
-            console.log("userdata1", userData);
-
-            // Call the function to add the user to the database
-            await addUser(userData);
-            console.log("userdata2", userData);
-
-            // Render the signup success view or redirect to a success page
-            res.render("user/homepage", { user: userData });
+            res.render("user/signup", { errors });
         } catch (error) {
             console.error("Error in mainRouter:", error);
             res.status(500).send("Internal Server Error");
@@ -72,6 +48,9 @@ module.exports = {
                 return res.status(400).render("user/signup", {
                     errors: `an account with ${email} already exist`,
                 });
+            }
+            if (!authentication) {
+                return res.render("user/signup");
             }
 
             // User doesn't exist, add the new user to the database
@@ -184,16 +163,10 @@ module.exports = {
                 },
             ]);
             console.log("userdata", userData);
-            // const userProfile = userData[0].userProfile;
-            // console.log("user", userProfile);
-            // console.log(userData);
-            // console.log("dhksdfkdf", userProfile);
-
-            // const showUser = await Profile.find({});
-            // console.log("showing user in get update", showUser);
+            
 
             res.render("user/updateprofile", {
-                user: userData,
+                 userData,
                 // newDetails: showUser,
             });
             // console.log("new details", showUser);
@@ -221,7 +194,6 @@ module.exports = {
         } catch (error) {
             console.log("post update is not working", error);
         }
-        r;
     },
     getShowProfile: async (req, res) => {
         try {
