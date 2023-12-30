@@ -163,10 +163,9 @@ module.exports = {
                 },
             ]);
             console.log("userdata", userData);
-            
 
             res.render("user/updateprofile", {
-                 userData,
+                userData,
                 // newDetails: showUser,
             });
             // console.log("new details", showUser);

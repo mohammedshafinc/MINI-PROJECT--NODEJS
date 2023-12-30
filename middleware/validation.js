@@ -50,11 +50,16 @@ function authentication(req, res, next) {
     if (echeck && pcheck && passwordMatch) {
         next();
         console.log("if working");
+    } else if (password !== confirmpassword) {
+        return res.render("user/signup", {
+            errors: "password and confirm password is not matching",
+        });
     } else {
         console.log("not matching");
 
-        res.render("user/signup", { errors: "not matching" });
-        next();
+        return res.render("user/signup", {
+            errors: "please enter valid email or password",
+        });
     }
 }
 

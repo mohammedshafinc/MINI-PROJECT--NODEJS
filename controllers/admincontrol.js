@@ -53,7 +53,11 @@ module.exports = {
     },
 
     getAddProducts: (req, res) => {
-        res.render("admin/addproduct");
+        if (req.session.user && req.session.isAdmin) {
+            res.render("admin/addproduct");
+        } else {
+            res.redirect("/login");
+        }
     },
 
     postAddProducts: async (req, res) => {
